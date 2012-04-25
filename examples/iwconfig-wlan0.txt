@@ -1,0 +1,9 @@
+wlan0     IEEE 802.11bg  ESSID:"Holonet"  
+          Mode:Managed  Frequency:2.462 GHz  Access Point: 00:19:5B:4F:2C:B3   
+          Bit Rate=36 Mb/s   Tx-Power=20 dBm   
+          Retry  long limit:7   RTS thr:off   Fragment thr:off
+          Power Management:off
+          Link Quality=70/70  Signal level=-36 dBm  
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:149  Invalid misc:265   Missed beacon:0
+

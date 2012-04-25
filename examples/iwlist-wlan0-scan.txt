@@ -1,0 +1,256 @@
+wlan0     Scan completed :
+          Cell 01 - Address: 00:19:5B:4F:2C:B3
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=70/70  Signal level=-36 dBm  
+                    Encryption key:on
+                    ESSID:"Holonet"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s
+                              36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=000000c4ba452675
+                    Extra: Last beacon: 4990ms ago
+                    IE: Unknown: 0007486F6C6F6E6574
+                    IE: Unknown: 010482848B96
+                    IE: Unknown: 03010B
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32080C1218243048606C
+                    IE: Unknown: DD1E00904C334E101DFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: DD1A00904C340B07050000000F000000000000000000000000000000
+                    IE: Unknown: 2D1A6E101DFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: 3D180B0700000000000000000000000000000000000000000000
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: DD180050F202010100000364000027A4000041435E0061322F00
+          Cell 02 - Address: 60:33:4B:E4:48:B1
+                    Channel:2
+                    Frequency:2.417 GHz (Channel 2)
+                    Quality=55/70  Signal level=-55 dBm  
+                    Encryption key:on
+                    ESSID:"J's Network"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000045482b9f172
+                    Extra: Last beacon: 9620ms ago
+                    IE: Unknown: 000B4A2773204E6574776F726B
+                    IE: Unknown: 010882848B960C121824
+                    IE: Unknown: 030102
+                    IE: Unknown: 0706555320010B1E
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32043048606C
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: 2D1AAC4117FFFFFF0000000000000000000000000000000000000000
+                    IE: Unknown: 3D1602001100000000000000000000000000000000000000
+                    IE: Unknown: DD180050F2020101020003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD0700039301720320
+                    IE: Unknown: DD070017F203020180
+                    IE: Unknown: DD0E0017F2070001010660334BE448B1
+          Cell 03 - Address: 66:33:4B:E4:48:B1
+                    Channel:2
+                    Frequency:2.417 GHz (Channel 2)
+                    Quality=55/70  Signal level=-55 dBm  
+                    Encryption key:on
+                    ESSID:"J's Guest Network"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000045482b93271
+                    Extra: Last beacon: 9620ms ago
+                    IE: Unknown: 00114A2773204775657374204E6574776F726B
+                    IE: Unknown: 010882848B960C121824
+                    IE: Unknown: 030102
+                    IE: Unknown: 0706555320010B1E
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32043048606C
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: 2D1AAC4117FFFFFF0000000000000000000000000000000000000000
+                    IE: Unknown: 3D1602001100000000000000000000000000000000000000
+                    IE: Unknown: DD180050F2020101020003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD0700039301720208
+                    IE: Unknown: DD070017F203020180
+                    IE: Unknown: DD0E0017F2070001010660334BE448B1
+          Cell 04 - Address: 5C:D9:98:68:66:48
+                    Channel:5
+                    Frequency:2.432 GHz (Channel 5)
+                    Quality=70/70  Signal level=-33 dBm  
+                    Encryption key:off
+                    ESSID:"corporate"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=000000005f8ff1d5
+                    Extra: Last beacon: 8820ms ago
+                    IE: Unknown: 0009636F72706F72617465
+                    IE: Unknown: 010882848B960C121824
+                    IE: Unknown: 030105
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32043048606C
+                    IE: Unknown: DD180050F2020101820003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD1E00904C334E101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: 2D1A4E101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: DD1A00904C3405080A00000000000000000000000000000000000000
+                    IE: Unknown: 3D1605080A00000000000000000000000000000000000000
+                    IE: Unknown: 4A0E14000A002C01C800140005001900
+                    IE: Unknown: 7F0101
+                    IE: Unknown: DD0900037F01010000FF7F
+                    IE: Unknown: DD0A00037F04010000004000
+                    IE: Unknown: DD9E0050F204104A0001101044000102103B00010310470010000000000000100000005CD99868664810210006442D4C696E6B1023000D442D4C696E6B20526F75746572102400074449522D363135104200046E6F6E651054000800060050F204000110110016442D4C696E6B2053797374656D73204449522D363135100800020086103C000103104900140024E26002000101600000020001600100020001
+          Cell 05 - Address: A0:21:B7:9E:40:BA
+                    Channel:4
+                    Frequency:2.427 GHz (Channel 4)
+                    Quality=58/70  Signal level=-52 dBm  
+                    Encryption key:on
+                    ESSID:"patrick"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=000000dd45f1082a
+                    Extra: Last beacon: 8950ms ago
+                    IE: Unknown: 00077061747269636B
+                    IE: Unknown: 010882848B960C121824
+                    IE: Unknown: 030104
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32043048606C
+                    IE: Unknown: DD180050F2020101820003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD1E00904C334C101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: 2D1A4C101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: DD1A00904C3404080800000000000000000000000000000000000000
+                    IE: Unknown: 3D1604080800000000000000000000000000000000000000
+                    IE: Unknown: DD0A00037F04010002004000
+                    IE: Unknown: DD7F0050F204104A0001101044000102103B0001031047001000000000000010000000A021B79E40BA102100044E54475210230009776E72323030307633102400016E104200046E6F6E651054000800060050F20400011011001B574E5232303030763328576972656C6573732041502D322E344729100800020086103C000103
+          Cell 06 - Address: 00:26:F3:66:F7:28
+                    Channel:7
+                    Frequency:2.442 GHz (Channel 7)
+                    Quality=70/70  Signal level=-37 dBm  
+                    Encryption key:on
+                    ESSID:"xfinityC2"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 9 Mb/s
+                              18 Mb/s; 36 Mb/s; 54 Mb/s
+                    Bit Rates:6 Mb/s; 12 Mb/s; 24 Mb/s; 48 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000252901194f0
+                    Extra: Last beacon: 7770ms ago
+                    IE: Unknown: 00097866696E6974794332
+                    IE: Unknown: 010882848B961224486C
+                    IE: Unknown: 030107
+                    IE: Unknown: 2A0106
+                    IE: Unknown: 32040C183060
+                    IE: Unknown: 2D1AEE1116FFFFFF0001000000000000000000000000030000000000
+                    IE: Unknown: 3D1607050000000000000000000000000000000000000000
+                    IE: Unknown: 3E0100
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : TKIP CCMP
+                        Authentication Suites (1) : PSK
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : TKIP CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: DD180050F2020101800003A4000027A4000042435E0062322F00
+                    IE: Unknown: 0B0500002B127A
+                    IE: Unknown: 4A0E14000A002C01C800140005001900
+                    IE: Unknown: DD07000C4300000000
+                    IE: Unknown: 0706555320010B10
+                    IE: Unknown: DD9D0050F204104A0001101044000102103B000103104700102880288028801880A8800026F366F7281021001852616C696E6B20546563686E6F6C6F67792C20436F72702E1023001C52616C696E6B20576972656C6573732041636365737320506F696E74102400065254323836301042000831323334353637381054000800060050F20400011011000952616C696E6B415053100800020084103C000101
+          Cell 07 - Address: 1C:AF:F7:D8:0C:6B
+                    Channel:7
+                    Frequency:2.442 GHz (Channel 7)
+                    Quality=59/70  Signal level=-51 dBm  
+                    Encryption key:on
+                    ESSID:"PXLink"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000003130498ce0
+                    Extra: Last beacon: 7780ms ago
+                    IE: Unknown: 000650584C696E6B
+                    IE: Unknown: 010882848B960C121824
+                    IE: Unknown: 030107
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : CCMP TKIP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 32043048606C
+                    IE: Unknown: DD180050F2020101820003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD1E00904C334E101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: 2D1A4E101BFFFF000000000000000000000000000000000000000000
+                    IE: Unknown: DD1A00904C3407001900000000000000000000000000000000000000
+                    IE: Unknown: 3D1607001900000000000000000000000000000000000000
+                    IE: Unknown: 4A0E14000A002C01C800140005001900
+                    IE: Unknown: 7F0101
+                    IE: Unknown: DD0900037F01010000FF7F
+                    IE: Unknown: DD0A00037F04010000004000
+                    IE: Unknown: DD9E0050F204104A0001101044000102103B00010310470010000000000000100000001CAFF7D80C6B10210006442D4C696E6B1023000D442D4C696E6B20526F75746572102400074449522D363135104200046E6F6E651054000800060050F204000110110016442D4C696E6B2053797374656D73204449522D363135100800020086103C000103104900140024E26002000101600000020001600100020001
+          Cell 08 - Address: 30:46:9A:96:6F:BA
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=61/70  Signal level=-49 dBm  
+                    Encryption key:on
+                    ESSID:"home-data"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+                              24 Mb/s; 36 Mb/s; 54 Mb/s
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000015a2ee1d45
+                    Extra: Last beacon: 7120ms ago
+                    IE: Unknown: 0009686F6D652D64617461
+                    IE: Unknown: 010882840B162430486C
+                    IE: Unknown: 03010B
+                    IE: Unknown: 2A0100
+                    IE: Unknown: 2F0100
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: 32040C121860
+                    IE: Unknown: 2D1A7E181BFFFF000001000000000000000000000000000000000000
+                    IE: Unknown: 3D160B071300000000000000000000000000000000000000
+                    IE: Unknown: DD800050F204104A00011010440001021041000100103B00010310470010D0D4580F15A80834C374487163AB8C781021000D4E4554474541522C20496E632E10230008574E52333530304C10240008574E52333530304C10420004333530301054000800060050F204000110110008574E52333530304C100800020084103C000101
+                    IE: Unknown: DD090010180201F0050000
+                    IE: Unknown: DD180050F2020101800003A4000027A4000042435E0062322F00
+                    IE: Unknown: DD1E00904C337E181BFFFF000001000000000000000000000000000000000000
+                    IE: Unknown: DD1A00904C340B071300000000000000000000000000000000000000
+          Cell 09 - Address: 00:1E:E5:32:5B:FD
+                    Channel:10
+                    Frequency:2.457 GHz (Channel 10)
+                    Quality=55/70  Signal level=-55 dBm  
+                    Encryption key:on
+                    ESSID:"Bonnie"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+                              24 Mb/s; 36 Mb/s; 54 Mb/s
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000026c5cf6692
+                    Extra: Last beacon: 6980ms ago
+                    IE: Unknown: 0006426F6E6E6965
+                    IE: Unknown: 010882848B962430486C
+                    IE: Unknown: 03010A
+                    IE: Unknown: 2A0104
+                    IE: Unknown: 2F0104
+                    IE: Unknown: 32040C121860
+                    IE: Unknown: DD09001018020014000000
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : TKIP
+                        Authentication Suites (1) : PSK
+
