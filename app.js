@@ -1,8 +1,11 @@
 var wireless = require('wireless');
 
 wireless.configure({
-    scan: 'cat examples/iwlist-wlan0-scan.txt',
-    status: 'cat examples/iwconfig-wlan0.txt',
+    commands: {
+        scan: 'cat examples/iwlist-wlan0-scan.txt',
+        stat: 'cat examples/iwconfig-wlan0.txt',
+    },
+    iface: 'wlan0'
 });
 
 wireless.on('appear', function(error, network) {
