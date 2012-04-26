@@ -26,7 +26,11 @@ wireless.on('disappear', function(error, network) {
 
 wireless.start(function() {
     var ssid = wireless.list()[5];
-    wireless.join(ssid, null, function() {
+    wireless.join(ssid, null, function(error, network) {
+        if (error) {
+            console.log("There was an error connecting to the fifth network");
+            throw error;
+        }
         console.log("I've connected to the fifth network!");
     });
 });
