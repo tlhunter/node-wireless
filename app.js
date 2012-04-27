@@ -14,7 +14,7 @@ wireless.on('appear', function(error, network) {
         throw error;
     }
     console.log("New Network: " + network.ssid);
-}
+});
 
 wireless.on('disappear', function(error, network) {
     if (error) {
@@ -22,7 +22,7 @@ wireless.on('disappear', function(error, network) {
         throw error;
     }
     console.log("Bye Network: " + network.ssid);
-}
+});
 
 wireless.start(function() {
     var ssid = wireless.list()[5];
