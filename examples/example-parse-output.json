@@ -1,0 +1,13 @@
+[
+	{
+		essid: "Wireless_Name",
+		mac: "12:34:56:78:90:AB",
+		mode: "Master",
+		channel: 11,
+		quality: 70,
+		encryption: true,
+		group_cipher: "tkip",
+		pairwise_cipher: "ccmp",
+		auth_suites: "psk"
+	}
+]
