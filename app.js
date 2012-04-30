@@ -1,4 +1,6 @@
 var wireless = require('wireless');
+var fs = require('fs');
+var _ = require('underscore');
 
 wireless.configure({
     commands: {
@@ -33,4 +35,11 @@ wireless.start(function() {
         }
         console.log("I've connected to the fifth network!");
     });
+});
+
+fs.readFile('examples/iwlist-wlan0-scan-long.txt', function(err, data) {
+    if (err) throw err;
+    var content = data.toString();
+    var networks = wireless.parse(content);
+    console.log(networks);
 });
