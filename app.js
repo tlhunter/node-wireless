@@ -37,7 +37,7 @@ wireless.start(function() {
     });
 });
 
-fs.readFile('examples/iwlist-wlan0-scan.txt', function(err, data) {
+fs.readFile('examples/downtown.txt', function(err, data) {
     if (err) throw err;
     var content = data.toString();
     var networks = wireless.parse(content);
