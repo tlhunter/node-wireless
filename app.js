@@ -26,6 +26,23 @@ wireless.on('disappear', function(error, network) {
     console.log("Bye Network: " + network.ssid);
 });
 
+wireless.on('change', function(error, network) {
+    if (error) {
+        console.log("There was an error when a network changed");
+        throw error;
+    }
+    console.log("Network Changed: " + network.ssid);
+});
+
+wireless.on('connect', function(error, network) {
+    console.log("Connected to: " + network.ssid);
+});
+
+wireless.on('disconnect', function(error, network) {
+    console.log("Disconnected from Network: " + network.ssid);
+    console.log("Don't be sad. There are still " + wireless.networks.length + " fish in the sea.");
+});
+
 wireless.start(function() {
     var ssid = wireless.list()[5];
     wireless.join(ssid, null, function(error, network) {
@@ -37,6 +54,7 @@ wireless.start(function() {
     });
 });
 
+// Just testing the parser for now
 fs.readFile('examples/downtown.txt', function(err, data) {
     if (err) throw err;
     var content = data.toString();
