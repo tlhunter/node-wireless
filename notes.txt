@@ -1,0 +1,9 @@
+# Connect to a WEP network
+iwconfig INTERFACE essid "ESSID" key s:KEY
+
+# Connect to a WPA network
+wpa_passphrase myrouter mypassphrase > wpa.conf
+wpa_supplicant -Dwext -iINTERFACE -cwpa.conf
+
+# Enable DHCP to acquire IP Address
+dhclient INTERFACE
