@@ -4,10 +4,11 @@ var _ = require('underscore');
 
 wireless.configure({
     commands: {
-        scan: 'cat examples/iwlist-wlan0-scan.txt',
-        stat: 'cat examples/iwconfig-wlan0.txt',
+        scan: 'sudo iwlist :INTERFACE scan',
+        stat: 'sudo ifconfig :INTERFACE',
     },
-    iface: 'wlan0'
+    iface: 'wlan0',
+    updateFrequency: 10,
 });
 
 wireless.on('appear', function(error, network) {
@@ -35,11 +36,4 @@ wireless.start(function() {
         }
         console.log("I've connected to the fifth network!");
     });
-});
-
-fs.readFile('examples/downtown.txt', function(err, data) {
-    if (err) throw err;
-    var content = data.toString();
-    var networks = wireless.parse(content);
-    console.log(networks);
 });
