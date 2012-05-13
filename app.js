@@ -16,7 +16,7 @@ wireless.on('appear', function(error, network) {
         console.log("There was an error when a network appeared");
         throw error;
     }
-    console.log("New Network: " + network.ssid);
+    console.log("New Network: " + network.ssid + " (" + network.address + ")");
 });
 
 wireless.on('disappear', function(error, network) {
