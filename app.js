@@ -8,7 +8,7 @@ wireless.configure({
         stat: 'sudo ifconfig :INTERFACE',
     },
     iface: 'wlan0',
-    updateFrequency: 10,
+    updateFrequency: 5,
 });
 
 wireless.on('appear', function(error, network) {
@@ -16,7 +16,8 @@ wireless.on('appear', function(error, network) {
         console.log("There was an error when a network appeared");
         throw error;
     }
-    console.log("New Network: " + network.ssid + " (" + network.address + ")");
+    var strength = Math.floor(network.quality / 70 * 100);
+    console.log("New: " + network.ssid + " [" + network.address + "] " + strength + "%");
 });
 
 wireless.on('disappear', function(error, network) {
