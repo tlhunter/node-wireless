@@ -6,6 +6,10 @@ wireless.configure({
     commands: {
         scan: 'sudo iwlist :INTERFACE scan',
         stat: 'sudo ifconfig :INTERFACE',
+        disable: 'sudo ifconfig :INTERFACE down',
+        enable: 'sudo ifconfig :INTERFACE up',
+        list: 'iwconfig',
+        metric: 'ifconfig :INTERFACE metric :VALUE',
     },
     iface: 'wlan0',
     updateFrequency: 8,
