@@ -26,15 +26,21 @@ to be installed, which are binaries.
 Current Status
 =
 
-Currently, finding new networks will trigger events:
+Currently, enabling/disabling adapter works, finding new networks will trigger events:
 
-    $ node app.js 
-    [  APPEAR] Home-Data [30:46:9A:96:6F:BA] 100%
-    [  APPEAR]  [00:02:A8:D2:07:8C] 77%
-    [  APPEAR] myLGNet078f [00:02:A8:D2:07:8D] 77%
-    [  APPEAR] 2WIRE210 [00:24:56:65:00:B1] 77%
-    [  APPEAR] corporate [5C:D9:98:68:66:48] 100%
-    [  APPEAR] xfinityC2 [00:26:F3:66:F7:28] 100%
-    [  APPEAR] linksys [00:12:17:27:5E:AF] 74%
-    [  APPEAR]  [00:26:F3:66:F7:29] 100%
-    [  APPEAR]  [00:26:F3:66:F7:2A] 70%
+    $ node app.js
+    Enabling wireless card...
+    Wireless card enabled.
+    Starting wireless scan...
+    [  APPEAR] 2WIRE448 [98:2C:BE:69:8D:39] 82%
+    [  APPEAR] Brueggers_Free_WiFi [00:24:6C:A4:0E:30] 92%
+    [  APPEAR] EspressoRoyale [20:4E:7F:C3:64:D2] 100%
+    [  APPEAR] biwako [3C:EA:4F:38:13:29] 94%
+    [  APPEAR] fortinet [00:0E:8E:29:CF:B7] 88%
+    [  APPEAR]  [00:19:A9:CF:F3:00] 75%
+    [  APPEAR]  [00:19:A9:FC:05:10] 68%
+    ^C
+    Gracefully shutting down from SIGINT (Ctrl+C)
+    Disabling Adapter...
+    Stopping Wireless App...
+    Exiting...

@@ -8,10 +8,21 @@ wireless.configure({
         stat: 'sudo ifconfig :INTERFACE',
         disable: 'sudo ifconfig :INTERFACE down',
         enable: 'sudo ifconfig :INTERFACE up',
+        interfaces: 'iwconfig',
         metric: 'sudo ifconfig :INTERFACE metric :VALUE',
     },
     iface: 'wlan0',
     updateFrequency: 8,
+});
+
+console.log("Enabling wireless card...");
+wireless.enable(function() {
+    console.log("Wireless card enabled.");
+    console.log("Starting wireless scan...");
+
+    wireless.start(function() {
+        console.log("Wireless scanning has commenced.");
+    });
 });
 
 wireless.on('appear', function(error, network) {
@@ -48,21 +59,17 @@ wireless.on('disconnect', function(error, network) {
     console.log("Don't be sad. There are still " + wireless.networks.length + " fish in the sea.");
 });
 
-wireless.start(function() {
-    var ssid = wireless.list()[5];
-    wireless.join(ssid, null, function(error, network) {
-        if (error) {
-            console.log("[   ERROR] There was an error connecting to the fifth network");
-            throw error;
-        }
-        console.log("[    INFO] I've connected to the fifth network!");
-    });
-});
 
 process.on('SIGINT', function() {
     console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
     // some other closing procedures go here
-    wireless.stop(function() {
-        process.exit();
+    console.log("Disabling Adapter...");
+    wireless.disable(function() {
+        console.log("Stopping Wireless App...");
+        wireless.stop(function() {
+            console.log("Exiting...");
+            process.exit();
+        });
     });
+
 });
