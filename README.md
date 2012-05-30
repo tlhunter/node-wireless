@@ -26,19 +26,23 @@ to be installed, which are binaries.
 Current Status
 =
 
-Currently, enabling/disabling adapter works, finding new networks will trigger events:
+Currently, enabling/disabling adapter works, finding new networks will trigger events,
+able to read encryption method:
 
-    $ node app.js
+    $ node app.js 
     Enabling wireless card...
     Wireless card enabled.
     Starting wireless scan...
-    [  APPEAR] 2WIRE448 [98:2C:BE:69:8D:39] 82%
-    [  APPEAR] Brueggers_Free_WiFi [00:24:6C:A4:0E:30] 92%
-    [  APPEAR] EspressoRoyale [20:4E:7F:C3:64:D2] 100%
-    [  APPEAR] biwako [3C:EA:4F:38:13:29] 94%
-    [  APPEAR] fortinet [00:0E:8E:29:CF:B7] 88%
-    [  APPEAR]  [00:19:A9:CF:F3:00] 75%
-    [  APPEAR]  [00:19:A9:FC:05:10] 68%
+    [  APPEAR] Home-Data [30:46:9A:96:6F:BA] 100% WPA2
+    [  APPEAR] corporate [5C:D9:98:68:66:48] 100% 
+    [  APPEAR] xfinityC2 [00:26:F3:66:F7:28] 100% WPA2
+    [  APPEAR]  [00:26:F3:66:F7:29] 100% WPA2
+    [  APPEAR] nucleocide [00:18:F8:75:60:80] 100% WEP
+    [  APPEAR] HOME-0238 [00:26:F3:CD:02:38] 85% WPA
+    [  APPEAR]  [00:26:F3:CD:02:3A] 87% WPA2
+    [  APPEAR] myLGNet078f [00:02:A8:D2:07:8D] 74% WEP
+    [  APPEAR] ladybird [00:22:2D:AF:E4:BB] 67% WPA2
+    [  APPEAR]  [00:26:F3:51:B2:49] 64% WPA2
     ^C
     Gracefully shutting down from SIGINT (Ctrl+C)
     Disabling Adapter...
