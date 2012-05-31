@@ -48,3 +48,16 @@ able to read encryption method:
     Disabling Adapter...
     Stopping Wireless App...
     Exiting...
+
+Requirements
+=
+
+Needs wpa_supplicant, a wireless card which can see a list of available networks.
+
+Assumptions
+=
+
+* We assume that dhcp isn't enabled on the wireless device by default.
+* I've only tried this in Arch Linux.
+* I've only tried this using a wireless card with the RTL8187 chipset.
+* My user account has password-free sudo ability.
