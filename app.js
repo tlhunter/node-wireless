@@ -31,7 +31,7 @@ wireless.on('appear', function(error, network) {
         throw error;
     }
     var strength = Math.floor(network.quality / 70 * 100);
-    console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.encryption_type);
+    console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + network.encryption_type);
 });
 
 wireless.on('disappear', function(error, network) {

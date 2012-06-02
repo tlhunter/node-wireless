@@ -33,16 +33,25 @@ able to read encryption method:
     Enabling wireless card...
     Wireless card enabled.
     Starting wireless scan...
-    [  APPEAR] Home-Data [30:46:9A:96:6F:BA] 100% WPA2
-    [  APPEAR] corporate [5C:D9:98:68:66:48] 100% 
-    [  APPEAR] xfinityC2 [00:26:F3:66:F7:28] 100% WPA2
-    [  APPEAR]  [00:26:F3:66:F7:29] 100% WPA2
-    [  APPEAR] nucleocide [00:18:F8:75:60:80] 100% WEP
-    [  APPEAR] HOME-0238 [00:26:F3:CD:02:38] 85% WPA
-    [  APPEAR]  [00:26:F3:CD:02:3A] 87% WPA2
-    [  APPEAR] myLGNet078f [00:02:A8:D2:07:8D] 74% WEP
-    [  APPEAR] ladybird [00:22:2D:AF:E4:BB] 67% WPA2
-    [  APPEAR]  [00:26:F3:51:B2:49] 64% WPA2
+    [  APPEAR] Home-Data [30:46:9A:96:6F:BA] 74% -58 dBm WPA2
+    [  APPEAR] corporate [5C:D9:98:68:66:48] 100% -22 dBm 
+    [  APPEAR] xfinityC2 [00:26:F3:66:F7:28] 100% -34 dBm WPA2
+    [  APPEAR]  [00:26:F3:66:F7:29] 74% -58 dBm WPA2
+    [  APPEAR]  [00:26:F3:66:F7:2A] 98% -41 dBm WPA2
+    [  APPEAR]  [00:26:F3:66:F7:2B] 100% -36 dBm WPA2
+    [  APPEAR] Bonnie [00:1E:E5:32:5B:FD] 80% -54 dBm WPA
+    [  APPEAR] Santh [00:22:75:CA:D6:45] 74% -58 dBm WEP
+    [  APPEAR]  [00:02:A8:D2:07:8C] 81% -53 dBm WPA
+    [  APPEAR] PXLink [1C:AF:F7:D8:0C:6B] 94% -44 dBm WPA
+    [  APPEAR] HOME-0238 [00:26:F3:CD:02:38] 82% -52 dBm WPA
+    [  APPEAR] Holonet [00:19:5B:4F:2C:B3] 100% -25 dBm WPA2
+    [  APPEAR] myLGNet078f [00:02:A8:D2:07:8D] 81% -53 dBm WEP
+    [  APPEAR] 2WIRE926 [B0:E7:54:EA:3C:99] 71% -60 dBm WPA
+    [  APPEAR] Cisco07590 [20:AA:4B:53:9C:E4] 65% -64 dBm 
+    [  APPEAR]  [00:26:F3:CD:02:3B] 75% -57 dBm WPA2
+    [  APPEAR]  [00:26:F3:CD:02:39] 82% -52 dBm WPA2
+    [  APPEAR] TRENDnet [00:14:D1:39:20:F2] 68% -62 dBm WPA
+    [  APPEAR]  [00:26:F3:CD:02:3A] 70% -61 dBm WPA2
     ^C
     Gracefully shutting down from SIGINT (Ctrl+C)
     Disabling Adapter...
