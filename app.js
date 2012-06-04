@@ -32,7 +32,17 @@ wireless.on('appear', function(error, network) {
         throw error;
     }
     var strength = Math.floor(network.quality / 70 * 100);
-    console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + network.encryption_type);
+    var encryption_type = 'NONE';
+    if (network.encryption_wep) {
+        encryption_type = 'WEP';
+    } else if (network.encryption_wpa && network.encryption_wpa2) {
+        encryption_type = 'WPA&WPA2';
+    } else if (network.encryption_wpa) {
+        encryption_type = 'WPA';
+    } else if (network.encryption_wpa2) {
+        encryption_type = 'WPA2';
+    }
+    console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
 });
 
 wireless.on('disappear', function(error, network) {
@@ -40,7 +50,7 @@ wireless.on('disappear', function(error, network) {
         console.log("[   ERROR] There was an error when a network disappeared");
         throw error;
     }
-    console.log("[    HIDE] Network: " + network.ssid + " [" + network.address + "] ");
+    console.log("[    HIDE] " + network.ssid + " [" + network.address + "] ");
 });
 
 wireless.on('change', function(error, network) {
