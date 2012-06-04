@@ -1,4 +1,4 @@
-Node WiFi Controller
+Node.js WiFi Interface
 ===
 
 This Node.js module will provide at least the following features:
@@ -23,18 +23,29 @@ This should be able to run on any Linux distro, BSD, OS X. I think there
 will be a requirement for the wpa_supplicant and possibly wpa_cli packages
 to be installed, which are binaries.
 
+Installation
+=
+
+    npm install wireless
+
+The module itself is (currently) located in this repo in the node_modules/wireless
+directory. If you install the module using the command above, just that folder will
+be added to your project. Everything above that directory is just some sample code
+stuff; I'll make the repo map to the module directory better once it is fit for
+public consumption.
+
 Current Status
 =
 
 Currently, enabling/disabling adapter works, finding new networks will trigger events,
-able to read encryption method:
+able to read encryption method and other data, and disappearing networks trigger events.
 
     $ node app.js 
     Enabling wireless card...
     Wireless card enabled.
     Starting wireless scan...
     [  APPEAR] Home-Data [30:46:9A:96:6F:BA] 74% -58 dBm WPA2
-    [  APPEAR] corporate [5C:D9:98:68:66:48] 100% -22 dBm 
+    [  APPEAR] corporate [5C:D9:98:68:66:48] 100% -22 dBm OPEN
     [  APPEAR] xfinityC2 [00:26:F3:66:F7:28] 100% -34 dBm WPA2
     [  APPEAR]  [00:26:F3:66:F7:29] 74% -58 dBm WPA2
     [  APPEAR]  [00:26:F3:66:F7:2A] 98% -41 dBm WPA2
@@ -47,7 +58,7 @@ able to read encryption method:
     [  APPEAR] Holonet [00:19:5B:4F:2C:B3] 100% -25 dBm WPA2
     [  APPEAR] myLGNet078f [00:02:A8:D2:07:8D] 81% -53 dBm WEP
     [  APPEAR] 2WIRE926 [B0:E7:54:EA:3C:99] 71% -60 dBm WPA
-    [  APPEAR] Cisco07590 [20:AA:4B:53:9C:E4] 65% -64 dBm 
+    [  APPEAR] Cisco07590 [20:AA:4B:53:9C:E4] 65% -64 dBm OPEN
     [  APPEAR]  [00:26:F3:CD:02:3B] 75% -57 dBm WPA2
     [  APPEAR]  [00:26:F3:CD:02:39] 82% -52 dBm WPA2
     [  APPEAR] TRENDnet [00:14:D1:39:20:F2] 68% -62 dBm WPA
