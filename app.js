@@ -10,6 +10,7 @@ wireless.configure({
         enable: 'sudo ifconfig :INTERFACE up',
         interfaces: 'iwconfig',
         metric: 'sudo ifconfig :INTERFACE metric :VALUE',
+        dhcp: 'sudo dhcpcd :INTERFACE',
     },
     iface: 'wlan0',
     updateFrequency: 8,
