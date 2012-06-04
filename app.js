@@ -33,7 +33,11 @@ wireless.on('appear', function(error, network) {
         console.log("[   ERROR] There was an error when a network appeared");
         throw error;
     }
+
     var strength = Math.floor(network.quality / 70 * 100);
+
+    var ssid = network.ssid || '<HIDDEN>';
+
     var encryption_type = 'NONE';
     if (network.encryption_wep) {
         encryption_type = 'WEP';
@@ -44,7 +48,8 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
+
+    console.log("[  APPEAR] " + ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
 });
 
 // A network disappeared (after the specified threshold)
