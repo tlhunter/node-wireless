@@ -13,6 +13,7 @@ wireless.configure({
     },
     iface: 'wlan0',
     updateFrequency: 8,
+    disappearThreshold: 7,
 });
 
 console.log("Enabling wireless card...");
@@ -39,7 +40,7 @@ wireless.on('disappear', function(error, network) {
         console.log("[   ERROR] There was an error when a network disappeared");
         throw error;
     }
-    console.log("[    HIDE] Network: " + network.ssid);
+    console.log("[    HIDE] Network: " + network.ssid + " [" + network.address + "] ");
 });
 
 wireless.on('change', function(error, network) {
