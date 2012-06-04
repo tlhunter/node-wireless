@@ -73,14 +73,15 @@ wireless.on('disconnect', function(error, network) {
 
 process.on('SIGINT', function() {
     console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
-    // some other closing procedures go here
+
     console.log("Disabling Adapter...");
     wireless.disable(function() {
+
         console.log("Stopping Wireless App...");
         wireless.stop(function() {
+
             console.log("Exiting...");
             process.exit();
         });
     });
-
 });
