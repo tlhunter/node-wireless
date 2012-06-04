@@ -14,7 +14,7 @@ wireless.configure({
     },
     iface: 'wlan0',
     updateFrequency: 8,
-    disappearThreshold: 7,
+    vanishThreshold: 7,
 });
 
 console.log("Enabling wireless card...");
@@ -27,6 +27,7 @@ wireless.enable(function() {
     });
 });
 
+// Found a new network
 wireless.on('appear', function(error, network) {
     if (error) {
         console.log("[   ERROR] There was an error when a network appeared");
@@ -46,14 +47,16 @@ wireless.on('appear', function(error, network) {
     console.log("[  APPEAR] " + network.ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
 });
 
-wireless.on('disappear', function(error, network) {
+// A network disappeared (after the specified threshold)
+wireless.on('vanish', function(error, network) {
     if (error) {
-        console.log("[   ERROR] There was an error when a network disappeared");
+        console.log("[   ERROR] There was an error when a network vanished");
         throw error;
     }
-    console.log("[    HIDE] " + network.ssid + " [" + network.address + "] ");
+    console.log("[  VANISH] " + network.ssid + " [" + network.address + "] ");
 });
 
+// A wireless network changed something about itself
 wireless.on('change', function(error, network) {
     if (error) {
         console.log("[   ERROR] There was an error when a network changed");
@@ -62,16 +65,18 @@ wireless.on('change', function(error, network) {
     console.log("[  CHANGE] " + network.ssid);
 });
 
-wireless.on('connect', function(error, network) {
-    console.log("[ CONNECT] " + network.ssid);
+// We've joined a network
+wireless.on('join', function(error, network) {
+    console.log("[    JOIN] " + network.ssid);
 });
 
-wireless.on('disconnect', function(error, network) {
-    console.log("[   DISCO] " + network.ssid);
+// We've left a network
+wireless.on('leave', function(error, network) {
+    console.log("[   LEAVE] " + network.ssid);
     console.log("Don't be sad. There are still " + wireless.networks.length + " fish in the sea.");
 });
 
-
+// User hit Ctrl + C
 process.on('SIGINT', function() {
     console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
 
