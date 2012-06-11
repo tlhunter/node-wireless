@@ -3,15 +3,6 @@ var fs = require('fs');
 var _ = require('underscore');
 
 wireless.configure({
-    commands: {
-        scan: 'sudo iwlist :INTERFACE scan',
-        stat: 'sudo ifconfig :INTERFACE',
-        disable: 'sudo ifconfig :INTERFACE down',
-        enable: 'sudo ifconfig :INTERFACE up',
-        interfaces: 'iwconfig',
-        metric: 'sudo ifconfig :INTERFACE metric :VALUE',
-        dhcp: 'sudo dhcpcd :INTERFACE',
-    },
     iface: 'wlan0',
     updateFrequency: 8,
     vanishThreshold: 7,
@@ -82,7 +73,13 @@ wireless.on('leave', function(error, network) {
 });
 
 // User hit Ctrl + C
+var killing_app = false;
 process.on('SIGINT', function() {
+    if (killing_app) {
+        console.log("\nDouble SIGINT, Killing without cleanup!");
+        process.exit();
+    }
+    killing_app = true;
     console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
 
     console.log("Disabling Adapter...");
