@@ -1,22 +1,23 @@
 var wireless = require('wireless');
 var fs = require('fs');
 var _ = require('underscore');
+var colors = require('colors');
 
 var connectedToMyHome = false;
 
 wireless.configure({
     iface: 'wlan0',
-    updateFrequency: 8,
+    updateFrequency: 12,
     vanishThreshold: 7,
 });
 
-console.log("Enabling wireless card...");
+console.log(("[PROGRESS] Enabling wireless card...").cyan);
 wireless.enable(function() {
-    console.log("Wireless card enabled.");
-    console.log("Starting wireless scan...");
+    console.log(("[PROGRESS] Wireless card enabled.").cyan);
+    console.log(("[PROGRESS] Starting wireless scan...").cyan);
 
     wireless.start(function() {
-        console.log("Wireless scanning has commenced.");
+        console.log(("[PROGRESS] Wireless scanning has commenced.").cyan);
     });
 });
 
@@ -58,10 +59,10 @@ wireless.on('appear', function(error, network) {
 // A network disappeared (after the specified threshold)
 wireless.on('vanish', function(error, network) {
     if (error) {
-        console.log("[   ERROR] There was an error when a network vanished");
+        console.log(("[   ERROR] There was an error when a network vanished").red);
         throw error;
     }
-    console.log("[  VANISH] " + network.ssid + " [" + network.address + "] ");
+    console.log(("[  VANISH] " + network.ssid + " [" + network.address + "] ").green);
 });
 
 // A wireless network changed something about itself
@@ -75,7 +76,7 @@ wireless.on('change', function(error, network) {
 
 // We've joined a network
 wireless.on('join', function(error, network) {
-    console.log("[    JOIN] " + network.ssid + " [" + network.address + "] ");
+    console.log(("[    JOIN] " + network.ssid + " [" + network.address + "] ").green);
 });
 
 // We've left a network
@@ -85,27 +86,39 @@ wireless.on('leave', function(error, network) {
 });
 
 // Just for debugging purposes
-wireless.on('command_debug', function(error, command) {
-    console.log("[ COMMAND] " + command);
+wireless.on('debug', function(error, command) {
+    console.log(("[ COMMAND] " + command).grey);
+});
+
+wireless.on('warning', function(error, message) {
+    console.log(("[ WARNING] " + message).yellow);
+});
+
+wireless.on('error', function(error, message) {
+    console.log(("[   ERROR] " + message).red);
+});
+
+wireless.on('fatal', function(error, message) {
+    console.log(("[   FATAL] " + message).red.underline);
 });
 
 // User hit Ctrl + C
 var killing_app = false;
 process.on('SIGINT', function() {
     if (killing_app) {
-        console.log("\nDouble SIGINT, Killing without cleanup!");
+        console.log(("[PROGRESS] Double SIGINT, Killing without cleanup!").cyan);
         process.exit();
     }
     killing_app = true;
-    console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
+    console.log(("[PROGRESS] Gracefully shutting down from SIGINT (Ctrl+C)").cyan);
 
-    console.log("Disabling Adapter...");
+    console.log(("[PROGRESS] Disabling Adapter...").cyan);
     wireless.disable(function() {
 
-        console.log("Stopping Wireless App...");
+        console.log(("[PROGRESS] Stopping Wireless App...").cyan);
         wireless.stop(function() {
 
-            console.log("Exiting...");
+            console.log(("[PROGRESS] Exiting...").cyan);
             process.exit();
         });
     });
