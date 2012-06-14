@@ -75,5 +75,5 @@ Assumptions
 
 * We assume that dhcp isn't enabled on the wireless device by default.
 * I've only tried this in Arch Linux.
-* I've only tried this using a wireless card with the RTL8187 chipset.
+* I've only tried this using a wireless card with the RTL8187 and rt2800usb chipset.
 * My user account has password-free sudo ability.
