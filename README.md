@@ -40,25 +40,30 @@ Current Status
 Currently, enabling/disabling adapter works, finding new networks will trigger events,
 able to read encryption method and other data, and disappearing networks trigger events.
 
-    $ node app.js
-    Enabling wireless card...
-    Wireless card enabled.
-    Starting wireless scan...
-    Wireless scanning has commenced.
-    [  APPEAR] OldWireless [00:27:0D:07:76:32] 63% -59 dBm WEP
-    [  APPEAR] x-wifi [00:27:0D:98:C2:52] 98% -41 dBm OPEN
-    [  APPEAR] y-wifi [64:AE:0C:01:A4:31] 100% -34 dBm WPA&WPA2
-    [  APPEAR] y-wifi [00:27:0D:98:C5:D1] 100% -21 dBm WPA&WPA2
-    [  APPEAR] x-wifi [00:27:0D:98:C5:D2] 100% -21 dBm OPEN
-    [  APPEAR] x-wifi [64:AE:0C:01:A4:32] 100% -34 dBm OPEN
-    [  APPEAR] z-wifi [00:24:6C:BA:1E:C0] 74% -58 dBm WPA
-    [  APPEAR] w-wifi [64:AE:0C:01:A4:33] 100% -34 dBm WPA2
-    [    HIDE] OldWireless [00:27:0D:07:76:32] 
-    ^C
-    Gracefully shutting down from SIGINT (Ctrl+C)
-    Disabling Adapter...
-    Stopping Wireless App...
-    Exiting...
+    $ node app.js 
+    [PROGRESS] Enabling wireless card...
+    [PROGRESS] Wireless card enabled.
+    [PROGRESS] Starting wireless scan...
+    [PROGRESS] Wireless scanning has commenced.
+    [  APPEAR] nucleocide [00:18:F8:75:60:80] 81% -53 dBm NONE
+    [  APPEAR] dOpsInternal [00:0C:41:36:A3:F6] 100% -34 dBm WPA
+    [  APPEAR] ArborMesh [62:3D:28:71:4F:79] 81% -53 dBm NONE
+    [  APPEAR] Zen Buddhist Temple Public [F8:D1:11:47:EE:4A] 77% -56 dBm NONE
+    [  APPEAR] Zen Buddhist Temple Private [FA:D1:11:47:EE:4B] 67% -63 dBm WPA2
+    [  APPEAR] AHOPS [00:23:A2:DE:4A:B0] 57% -70 dBm WPA&WPA2
+    [  APPEAR] ArborMesh [0A:B3:85:5F:45:99] 100% -5 dBm NONE
+    [  APPEAR] Zen Buddhist Temple Public [00:27:22:14:DB:84] 82% -52 dBm NONE
+    [  APPEAR] Zen Buddhist Temple Private [02:27:22:14:DB:85] 100% -5 dBm WPA2
+    [  APPEAR] 2WIRE163 [00:1F:B3:6B:97:D9] 78% -55 dBm WEP
+    Yay, we connected! I will try to disconnect in 20 seconds.
+    [    JOIN] nucleocide [00:18:F8:75:60:80] 
+    20 seconds are up, gonna try to disconnect now.
+    [   LEAVE] Left the network
+    [  APPEAR] ATT200 [CC:7D:37:81:0F:20] 68% -62 dBm WPA&WPA2
+    ^C[PROGRESS] Gracefully shutting down from SIGINT (Ctrl+C)
+    [PROGRESS] Disabling Adapter...
+    [PROGRESS] Stopping Wireless App...
+    [PROGRESS] Exiting...
 
 Requirements
 =
