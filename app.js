@@ -2,6 +2,8 @@ var wireless = require('wireless');
 var fs = require('fs');
 var _ = require('underscore');
 
+var connectedToMyHome = false;
+
 wireless.configure({
     iface: 'wlan0',
     updateFrequency: 8,
@@ -41,6 +43,16 @@ wireless.on('appear', function(error, network) {
     }
 
     console.log("[  APPEAR] " + ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
+
+    if (!connectedToMyHome && network.ssid == 'nucleocide') {
+        connectedToMyHome = true;
+        wireless.join(network, null, function() {
+            console.log("Yay, we connected!");
+        },
+        function() {
+            console.log("Unable to connect.");
+        });
+    }
 });
 
 // A network disappeared (after the specified threshold)
@@ -63,13 +75,18 @@ wireless.on('change', function(error, network) {
 
 // We've joined a network
 wireless.on('join', function(error, network) {
-    console.log("[    JOIN] " + network.ssid);
+    console.log("[    JOIN] " + network.ssid + " [" + network.address + "] ");
 });
 
 // We've left a network
 wireless.on('leave', function(error, network) {
     console.log("[   LEAVE] " + network.ssid);
     console.log("Don't be sad. There are still " + wireless.networks.length + " fish in the sea.");
+});
+
+// Just for debugging purposes
+wireless.on('command_debug', function(error, command) {
+    console.log("[ COMMAND] " + command);
 });
 
 // User hit Ctrl + C
