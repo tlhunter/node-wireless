@@ -48,7 +48,11 @@ wireless.on('appear', function(error, network) {
     if (!connectedToMyHome && network.ssid == 'nucleocide') {
         connectedToMyHome = true;
         wireless.join(network, null, function() {
-            console.log("Yay, we connected!");
+            console.log("Yay, we connected! I will try to disconnect in 20 seconds.");
+            setTimeout(function() {
+                console.log("20 seconds are up, gonna try to disconnect now.");
+                wireless.leave();
+            }, 20 * 1000);
         },
         function() {
             console.log("Unable to connect.");
@@ -80,9 +84,8 @@ wireless.on('join', function(error, network) {
 });
 
 // We've left a network
-wireless.on('leave', function(error, network) {
-    console.log("[   LEAVE] " + network.ssid);
-    console.log("Don't be sad. There are still " + wireless.networks.length + " fish in the sea.");
+wireless.on('leave', function(error) {
+    console.log(("[   LEAVE] Left the network").green);
 });
 
 // Just for debugging purposes
