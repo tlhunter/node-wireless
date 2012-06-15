@@ -47,7 +47,7 @@ wireless.on('appear', function(error, network) {
 
     if (!connectedToMyHome && network.ssid == 'nucleocide') {
         connectedToMyHome = true;
-        wireless.join(network, null, function() {
+        wireless.join(network, '03DABE4AAC', function() {
             console.log("Yay, we connected! I will try to disconnect in 20 seconds.");
             setTimeout(function() {
                 console.log("20 seconds are up, gonna try to disconnect now.");
