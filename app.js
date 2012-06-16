@@ -28,7 +28,7 @@ wireless.on('appear', function(error, network) {
         throw error;
     }
 
-    var strength = Math.floor(network.quality / 70 * 100);
+    var quality = Math.floor(network.quality / 70 * 100);
 
     var ssid = network.ssid || '<HIDDEN>';
 
@@ -43,7 +43,7 @@ wireless.on('appear', function(error, network) {
         encryption_type = 'WPA2';
     }
 
-    console.log("[  APPEAR] " + ssid + " [" + network.address + "] " + strength + "% " + network.strength + " dBm " + encryption_type);
+    console.log("[  APPEAR] " + ssid + " [" + network.address + "] " + quality + "% " + network.strength + " dBm " + encryption_type);
 
     if (!connectedToMyHome && network.ssid == 'nucleocide') {
         connectedToMyHome = true;
@@ -76,6 +76,14 @@ wireless.on('change', function(error, network) {
         throw error;
     }
     console.log("[  CHANGE] " + network.ssid);
+});
+
+wireless.on('change-levels', function(error, network) {
+    if (error) {
+        console.log("[   ERROR] There was an error when a network changed");
+        throw error;
+    }
+    console.log("[  LEVELS] " + network.ssid);
 });
 
 // We've joined a network
