@@ -93,6 +93,10 @@ wireless.on('debug', function(error, command) {
     console.log(("[ COMMAND] " + command).grey);
 });
 
+wireless.on('empty-scan', function(error) {
+    console.log(("[   EMPTY] Found no networks this scan").yellow);
+});
+
 wireless.on('warning', function(error, message) {
     console.log(("[ WARNING] " + message).yellow);
 });
