@@ -47,7 +47,7 @@ wireless.on('appear', function(error, network) {
 
     if (!connectedToMyHome && network.ssid == 'Zen Buddhist Temple Public') {
         connectedToMyHome = true;
-        wireless.join(network, 'pineapple', function() {
+        wireless.join(network, '', function() {
             console.log("Yay, we connected! I will try to get an IP.");
             wireless.dhcp(network, function(ip_address) {
                 console.log("Yay, I got an IP address (" + ip_address + ")! I'm going to disconnect in 20 seconds.");
