@@ -45,14 +45,20 @@ wireless.on('appear', function(error, network) {
 
     console.log("[  APPEAR] " + ssid + " [" + network.address + "] " + quality + "% " + network.strength + " dBm " + encryption_type);
 
-    if (!connectedToMyHome && network.ssid == 'nucleocide') {
+    if (!connectedToMyHome && network.ssid == 'Zen Buddhist Temple Public') {
         connectedToMyHome = true;
         wireless.join(network, 'pineapple', function() {
-            console.log("Yay, we connected! I will try to disconnect in 20 seconds.");
-            setTimeout(function() {
-                console.log("20 seconds are up, gonna try to disconnect now.");
-                wireless.leave();
-            }, 20 * 1000);
+            console.log("Yay, we connected! I will try to get an IP.");
+            wireless.dhcp(network, function(ip_address) {
+                console.log("Yay, I got an IP address (" + ip_address + ")! I'm going to disconnect in 20 seconds.");
+                setTimeout(function() {
+                    console.log("20 seconds are up! Attempting to turn off DHCP...");
+                    wireless.dhcpStop(function() {
+                        console.log("DHCP has been turned off. Leaving the network...");
+                        wireless.leave();
+                    });
+                }, 20 * 1000);
+            });
         },
         function() {
             console.log("Unable to connect.");
@@ -99,6 +105,10 @@ wireless.on('leave', function(error) {
 // Just for debugging purposes
 wireless.on('debug', function(error, command) {
     console.log(("[ COMMAND] " + command).grey);
+});
+
+wireless.on('dhcp-acquired-ip', function(error, ip_address) {
+    console.log(("[    DHCP] Leased IP " + ip_address).grey);
 });
 
 //wireless.on('batch-scan', function(error, networks) {
