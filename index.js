@@ -3,7 +3,6 @@ var events = require('events');
 var exec = require('child_process').exec;
 var _ = require('underscore');
 
-// gonna require some sys or child_process stuff for executing nix commands
 var Wireless = function() {
     events.EventEmitter.call(this);
     var self = this;
@@ -53,12 +52,13 @@ var Wireless = function() {
             connect_wpa: 'sudo wpa_passphrase ":ESSID" :PASSWORD > wpa-temp.conf && sudo wpa_supplicant -D wext -i :INTERFACE -c wpa-temp.conf && rm wpa-temp.conf',
             connect_open: 'sudo iwconfig :INTERFACE essid ":ESSID"',
         },
+
         translated: {}
     };
 
     // Set the configuration settings
     self.configure = function(config) {
-        // The next four lines are a sloppy attempt to merge configuration object. Should be prettier.
+        // TODO: The next four lines are a sloppy attempt to merge configuration object
         var oldCommands = self.configuration.commands;
         _.extend(oldCommands, config.commands);
         _.extend(self.configuration, config);
@@ -81,6 +81,7 @@ var Wireless = function() {
             if (!data.hasOwnProperty(index)) break;
             string = string.replace(':' + index.toUpperCase(), data[index]);
         }
+
         return string;
     };
 
@@ -100,18 +101,21 @@ var Wireless = function() {
         }
     };
 
-    // everytime we find a network during a scan, we pass it through this function
+    // Every time we find a network during a scan, we pass it through this function
     self._seeNetwork = function(network) {
         if (self.networks[network.address]) {
             var oldNetwork = self.networks[network.address];
+
             if (oldNetwork.ssid != network.ssid || oldNetwork.encryption_any != network.encryption_any) {
                 self.emit('change', false, network);
             } else if (oldNetwork.strength != network.strength || oldNetwork.quality != network.quality) {
                 self.emit('change-levels', false, network);
             }
+
             self.networks[network.address] = network;
         } else {
             self.networks[network.address] = network;
+
             self.emit('appear', false, network);
         }
     };
@@ -121,6 +125,7 @@ var Wireless = function() {
         self.killing = true;
         clearInterval(self.scanner);
         self.emit('stop', false);
+
         if (callback) {
             callback();
         }
@@ -135,6 +140,7 @@ var Wireless = function() {
     // Attempts to run dhcpcd on the interface to get us an IP address
     self.dhcp = function(network, callback) {
         self.emit('debug', false, self.configuration.translated.dhcp);
+
         exec(self.configuration.translated.dhcp, function(err, stdout, stderr) {
             if (err) {
                 self.emit('fatal', false, "There was an unknown error enabling dhcp" + err);
@@ -166,6 +172,7 @@ var Wireless = function() {
     // Disables DHCPCD
     self.dhcpStop = function(callback) {
         self.emit('debug', false, self.configuration.translated.dhcp_disable);
+
         exec(self.configuration.translated.dhcp_disable, function(err, stdout, stderr) {
             if (err) {
                 self.emit('fatal', false, "There was an unknown error disabling dhcp" + err);
@@ -181,6 +188,7 @@ var Wireless = function() {
     // Enables the interface (ifconfig UP)
     self.enable = function(callback) {
         self.emit('debug', false, self.configuration.translated.enable);
+
         exec(self.configuration.translated.enable, function(err, stdout, stderr) {
             if (err) {
                 if (err.message.indexOf("No such device")) {
@@ -205,6 +213,7 @@ var Wireless = function() {
     // Disables the interface (ifconfig DOWN)
     self.disable = function(callback) {
         self.emit('debug', false, self.configuration.translated.disable);
+
         exec(self.configuration.translated.disable, function(err, stdout, stderr) {
             if (err) {
                 self.emit('fatal', false, "There was an unknown error disabling the interface" + err);
@@ -230,7 +239,6 @@ var Wireless = function() {
         } else {
             self._executeConnectOPEN(network.ssid, callback_success, callback_failure);
         }
-
     };
 
     // Attempts to disconnect from the specified network
@@ -253,14 +261,17 @@ var Wireless = function() {
         var networks = [];
         var network = {};
         var networkCount = 0;
+
         _.each(lines, function(line) {
             line = line.replace(/^\s+|\s+$/g,"");
+
             // a "Cell" line means that we've found a start of a new network
             if (line.indexOf('Cell') === 0) {
                 networkCount++;
                 if (!_.isEmpty(network)) {
                     networks.push(network);
                 }
+
                 network = {
                     //speeds: []
                     last_tick: 0,
@@ -269,6 +280,7 @@ var Wireless = function() {
                     encryption_wpa: false,
                     encryption_wpa2: false,
                 };
+
                 network.address = line.match(/([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}/)[0];
             } else if (line.indexOf('Channel') === 0) {
                 network.channel = line.match(/Channel:([0-9]{1,2})/)[1];
@@ -293,6 +305,7 @@ var Wireless = function() {
                 network.encryption_wpa = true;
             }
         });
+
         if (!_.isEmpty(network)) {
             networks.push(network);
         }
@@ -300,6 +313,7 @@ var Wireless = function() {
         if (networkCount === 0) {
             self.emit('empty-scan', null);
         }
+
         return networks;
     };
 
@@ -307,12 +321,14 @@ var Wireless = function() {
     self._executeScan = function() {
         // Make this a non annonymous function, run immediately, then run interval which runs function
         self.emit('debug', false, self.configuration.translated.scan);
+
         exec(self.configuration.translated.scan, function(err, stdout, stderr) {
             if (err) {
                 if (self.killing) {
                     // Of course we got an error the main app is being killed, taking iwlist down with it
                     return;
                 }
+
                 self.emit('fatal', false, "Got some major errors from our scan command:" + err);
                 throw err;
             }
@@ -350,28 +366,34 @@ var Wireless = function() {
     // Checks to see if we are connected to a wireless network and have an IP address
     self._executeTrackConnection = function() {
         self.emit('debug', false, self.configuration.translated.stat);
+
         exec(self.configuration.translated.stat, function(err, stdout, stderr) {
             if (err) {
                 self.emit('fatal', false, "Error getting wireless devices information");
                 throw err;
             }
+
             var content = stdout.toString();
             var lines = content.split(/\r\n|\r|\n/);
             var foundOutWereConnected = false;
             var networkAddress = null;
 
             _.each(lines, function(line) {
-                //if (line.match(/inet (\b(?:\d{1,3}\.){3}\d{1,3}\b)/) || line.match(/inet6 ([a-f0-9:]*)/)) {
-                    //// looks like we're connected
-                    //foundOutWereConnected = true;
-                //}
+                /*
+                if (line.match(/inet (\b(?:\d{1,3}\.){3}\d{1,3}\b)/) || line.match(/inet6 ([a-f0-9:]*)/)) {
+                    // looks like we're connected
+                    foundOutWereConnected = true;
+                }
+                */
                 if (line.indexOf('Access Point') !== -1) {
                     networkAddress = line.match(/Access Point: ([a-fA-F0-9:]*)/)[1] || null;
+
                     if (networkAddress) {
                         foundOutWereConnected = true;
                     }
                 }
             });
+
             // guess we're not connected after all
             if (!foundOutWereConnected && self.connected) {
                 self.connected = false;
@@ -387,11 +409,13 @@ var Wireless = function() {
     self._executeConnectWEP = function(essid, password, callback_success, callback_failure) {
         var command = self.translate(self.configuration.translated.connect_wep, {'essid': essid, 'password': password});
         self.emit('debug', false, command);
+
         exec(command, function(err, stdout, stderr) {
             if (err || stderr) {
                 self.emit('error', false, "Shit is broken TODO");
                 console.log(err);
                 console.log(stderr);
+
                 if (callback_failure) {
                     callback_failure();
                 }
@@ -407,11 +431,13 @@ var Wireless = function() {
     self._executeConnectWPA = function(essid, password, callback_success, callback_failure) {
         var command = self.translate(self.configuration.translated.connect_wpa, {'essid': essid, 'password': password});
         self.emit('debug', false, command);
+
         exec(command, function(err, stdout, stderr) {
              if (err || stderr) {
                 self.emit('error', false, "Shit is broken TODO");
                 console.log(err);
                 console.log(stderr);
+
                 if (callback_failure) {
                     callback_failure();
                 }
@@ -427,10 +453,12 @@ var Wireless = function() {
     self._executeConnectOPEN = function(essid, callback_success, callback_failure) {
         var command = self.translate(self.configuration.translated.connect_open, {'essid': essid});
         self.emit('debug', false, command);
+
         exec(command, function(err, stdout, stderr) {
             if (err || stderr) {
                 self.emit('error', false, "There was an error joining an open network");
                 console.log(err, stderr);
+
                 if (callback_failure) {
                     callback_failure();
                 }
@@ -446,9 +474,13 @@ var Wireless = function() {
     self._decay = function() {
         // _.each can't iterate self.networks for some reason
         for (var address in self.networks) {
-            if (!self.networks.hasOwnProperty(address)) break;
+            if (!self.networks.hasOwnProperty(address)) {
+                break;
+            }
+
             var this_network = self.networks[address];
             this_network.last_tick++;
+
             if (this_network.last_tick == self.configuration.vanishThreshold+1) {
                 self.emit('vanish', false, this_network);
             }
