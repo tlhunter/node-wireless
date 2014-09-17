@@ -9,7 +9,7 @@ var Wireless = function() {
     var self = this;
 
     // List of networks (key is address)
-    self.networks = [];
+    self.networks = {};
 
     // ID for scanner interval
     self.scanner = null;
@@ -25,10 +25,10 @@ var Wireless = function() {
 
     // Configuration settings
     self.configuration = {
-        // Interface to listen on (should one day handle multiple)
+        // Interface to listen on. TODO: handle multiple
         iface: 'wlan0',
 
-        // How often to poll the listing of networks (this should perhaps be recursive)
+        // How often to poll the listing of networks
         updateFrequency: 10,
 
         // How often should we check if we're connected to a network? (this is a pretty fast operation)
