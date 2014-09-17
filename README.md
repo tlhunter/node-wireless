@@ -1,26 +1,27 @@
-# Node.js WiFi Interface
+# node-wireless
 
-This Node.js module will provide at least the following features:
+A utility for handling interactions with wireless interfaces on \*nix distributions.
 
-* Get a list of visible networks
-* Display info about connected network
-* Display different information about other networks, e.g. strength
-* Disconnect to network
-* Connect to network, provide credentials or certificate
-* Possibly handle multiple interfaces
-* Trigger an event when a new network appears
-* Trigger an event when a network changes
-* Trigger an event when a network disappears or lose connection
+## Goals
 
-Basically, this class should be able to do anything a user would be
-able to do using their OS's network configuration tools.
+This Node.js module will eventually provide all of the following features:
 
-Applications making use of this module should be able to build AI for
-handling network connections, or web GUI's for connecting, etc.
+* Get a list of visible networks ✓
+* Display info about connected network ✓
+* Display different information about other networks, e.g. strength ✓
+* Disconnect from network ✓
+* Connect to open networks ✓
+* Connect to secure networks, providing credentials or certificate
+* Trigger an event when a new network appears ✓
+* Trigger an event when a network changes ✓
+* Trigger an event when a network disappears or lose connection ✓
 
-This should be able to run on any Linux distro, BSD, OS X. I think there
-will be a requirement for the wpa_supplicant and possibly wpa_cli packages
-to be installed, which are binaries.
+Basically, this class should be able to do anything a user would be able to do using their OS's network configuration tools.
+
+Currently there is a dependency on the tool `wpa_supplicant` being installed.
+This module actually executes that utility many times to get results.
+Eventually we'll move to a D-Bus based approach (#19) which will result in much quicker results and fewer dependencies.
+
 
 ## Installation
 
@@ -28,20 +29,15 @@ to be installed, which are binaries.
 npm install wireless
 ```
 
-The module itself is (currently) located in this repo in the node_modules/wireless
-directory. If you install the module using the command above, just that folder will
-be added to your project. Everything above that directory is just some sample code
-stuff; I'll make the repo map to the module directory better once it is fit for
-public consumption.
 
 ## Current Status
 
 Currently, enabling/disabling adapter works, finding new networks will trigger events,
 able to read encryption method and other data, and disappearing networks trigger events,
-able to enable and disable dhcp.
+able to enable and disable dhcp, able to connect to unsecure networks.
 
 ```
-$ node app.js 
+$ ./examples/scan-connect-disconnect.js wlan0
 [PROGRESS] Enabling wireless card...
 [PROGRESS] Wireless card enabled.
 [PROGRESS] Starting wireless scan...
@@ -88,16 +84,18 @@ DHCP has been turned off. Leaving the network...
 [PROGRESS] Exiting...
 ```
 
+
 ## Requirements
 
 Needs `wpa_supplicant`, a wireless card which can see a list of available networks.
 
+
 ## Assumptions
 
-* We assume that dhcp isn't enabled on the wireless device by default.
-* I've only tried this in Arch Linux.
-* I've only tried this using a wireless card with the RTL8187 and rt2800usb chipset.
-* My user account has password-free sudo ability.
+* We assume that DHCP isn't enabled on the wireless device by default.
+* I've only tried this on Arch  and Debian Linux.
+* I've only tried this using a wireless card with the `RTL8187` and `rt2800usb` chipsets.
+
 
 ## License
 
