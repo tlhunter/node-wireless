@@ -6,6 +6,7 @@ var fs = require('fs');
 var connectedToMyHome = false;
 
 var iface = process.argv[2];
+// The SSID of an open wireless network you'd like to connect to
 var SSID = 'Zen Buddhist Temple Public';
 
 if (!iface) {
