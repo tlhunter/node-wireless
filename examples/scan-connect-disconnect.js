@@ -2,7 +2,6 @@
 
 var wireless = require('../index.js');
 var fs = require('fs');
-var _ = require('underscore');
 
 var connectedToMyHome = false;
 
