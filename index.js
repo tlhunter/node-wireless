@@ -1,7 +1,7 @@
 var util = require('util');
 var events = require('events');
-var _ = require('underscore');
 var exec = require('child_process').exec;
+var _ = require('underscore');
 
 // gonna require some sys or child_process stuff for executing nix commands
 var Wireless = function() {
@@ -69,7 +69,7 @@ var Wireless = function() {
         };
 
         // Translates each individual command
-        for (command in self.configuration.commands) {
+        for (var command in self.configuration.commands) {
             if (!self.configuration.commands.hasOwnProperty(command)) break;
             self.configuration.translated[command] = self.translate(self.configuration.commands[command], defaults);
         }
@@ -77,7 +77,7 @@ var Wireless = function() {
 
     // Translates strings. Looks for :SOMETHING in string, and replaces is with data.something.
     self.translate = function(string, data) {
-        for (index in data) {
+        for (var index in data) {
             if (!data.hasOwnProperty(index)) break;
             string = string.replace(':' + index.toUpperCase(), data[index]);
         }
@@ -254,7 +254,7 @@ var Wireless = function() {
         var network = {};
         var networkCount = 0;
         _.each(lines, function(line) {
-            var line = line.replace(/^\s+|\s+$/g,"");
+            line = line.replace(/^\s+|\s+$/g,"");
             // a "Cell" line means that we've found a start of a new network
             if (line.indexOf('Cell') === 0) {
                 networkCount++;
@@ -445,7 +445,7 @@ var Wireless = function() {
     // Go over each network, increment last_tick, if it equals the threshold, send an event
     self._decay = function() {
         // _.each can't iterate self.networks for some reason
-        for (address in self.networks) {
+        for (var address in self.networks) {
             if (!self.networks.hasOwnProperty(address)) break;
             var this_network = self.networks[address];
             this_network.last_tick++;
