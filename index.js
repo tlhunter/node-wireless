@@ -353,7 +353,7 @@ Wireless.prototype._executeScan = function() {
         var content = stdout.toString();
         var networks = self._parseScan(content);
 
-        // emit the raw data
+        // emit the raw data TODO: Deprecated, removed in 0.5.0
         self.emit('batch', networks);
 
         _.each(networks, function(network) {
@@ -411,7 +411,7 @@ Wireless.prototype._executeTrackConnection = function() {
                 return;
             }
 
-            self.emit('already-joined', networkAddress);
+            self.emit('former', networkAddress);
         }
     });
 };
