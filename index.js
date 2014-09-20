@@ -96,7 +96,7 @@ Wireless.prototype._seeNetwork = function(network) {
         if (oldNetwork.ssid != network.ssid || oldNetwork.encryption_any != network.encryption_any) {
             this.emit('change', network);
         } else if (oldNetwork.strength != network.strength || oldNetwork.quality != network.quality) {
-            this.emit('change-levels', network);
+            this.emit('signal', network);
         }
 
         this.networks[network.address] = network;

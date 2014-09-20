@@ -89,8 +89,8 @@ wireless.on('change', function(network) {
     console.log("[  CHANGE] " + network.ssid);
 });
 
-wireless.on('change-levels', function(network) {
-    console.log("[  LEVELS] " + network.ssid);
+wireless.on('signal', function(network) {
+    console.log("[  SIGNAL] " + network.ssid);
 });
 
 // We've joined a network
