@@ -7,7 +7,7 @@ var connected = false;
 
 var iface = process.argv[2];
 // The SSID of an open wireless network you'd like to connect to
-var SSID = 'Zen Buddhist Temple Public';
+var SSID = 'xfinitywifi';
 
 if (!iface) {
     console.log("Usage: " + process.argv[1] + " wlan0");
