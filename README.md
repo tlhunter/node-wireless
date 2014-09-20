@@ -34,7 +34,10 @@ npm install wireless
 
 ```javascript
 var wireless = new Wireless({
-    iface: 'wlan0'
+    iface: 'wlan0',
+	updateFrequency: 10, // Optional, seconds to scan for networks
+	connectionSpyFrequency: 2, // Optional, seconds to scan if connected
+	vanishThreshold: 2 // Optional, how many scans before network considered gone
 });
 
 wireless.enable(function(err) {
@@ -62,15 +65,16 @@ wireless.enable(function(err) {
 
 ## Methods
 
-* **enable**: Enables the wireless interface
-* **start**: Begins the scanning
-* **join**: Attempts to join the specified network
-* **leave**: Attempts to leave the specified network
-* **stop**: Stops the scanning process
-* **disable**: Disables the wireless interface
-* **list**: Gets a list of all the currently visible networks
-* **dhcp**: Attempts to enable DHCP for the interface and get an IP Address
-* **dhcpStop**: Attempts to stop the DHCP process
+* **Constructor(config)**: Creates a new Wireless instance
+* **enable(cb)**: Enables the wireless interface
+* **start()**: Begins the scanning
+* **join(network, pwd, cb)**: Attempts to join the specified network
+* **leave(cb)**: Attempts to leave the specified network
+* **stop(cb)**: Stops the scanning process
+* **disable(cb)**: Disables the wireless interface
+* **list()**: Gets a list of all the currently visible networks
+* **dhcp(cb)**: Attempts to enable DHCP for the interface and get an IP Address
+* **dhcpStop(cb)**: Attempts to stop the DHCP process
 
 
 ## Current Status
