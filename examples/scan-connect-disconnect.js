@@ -123,7 +123,7 @@ wireless.on('batch', function(networks) {
 });
 */
 
-wireless.on('empty-scan', function() {
+wireless.on('empty', function() {
     console.log("[   EMPTY] Found no networks this scan");
 });
 

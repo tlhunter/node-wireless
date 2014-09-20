@@ -307,8 +307,9 @@ Wireless.prototype._parseScan = function(scanResults) {
         networks.push(network);
     }
 
+    // TODO: Deprecated, will be removed in 0.5.0 release
     if (networkCount === 0) {
-        this.emit('empty-scan');
+        this.emit('empty');
     }
 
     return networks;
