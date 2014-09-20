@@ -72,7 +72,7 @@ Wireless.prototype.translate = function(string, data) {
 };
 
 // Start listening, runs in a loop
-Wireless.prototype.start = function(callback) {
+Wireless.prototype.start = function() {
     var self = this;
 
     // Check for networks
@@ -86,11 +86,6 @@ Wireless.prototype.start = function(callback) {
     this.connectionSpy = setInterval(function() {
         self._executeTrackConnection();
     }, this.connectionSpyFrequency * 1000);
-
-    // Callback (not too useful really)
-    if (callback) {
-        callback();
-    }
 };
 
 // Every time we find a network during a scan, we pass it through this function
@@ -99,16 +94,16 @@ Wireless.prototype._seeNetwork = function(network) {
         var oldNetwork = this.networks[network.address];
 
         if (oldNetwork.ssid != network.ssid || oldNetwork.encryption_any != network.encryption_any) {
-            this.emit('change', false, network);
+            this.emit('change', network);
         } else if (oldNetwork.strength != network.strength || oldNetwork.quality != network.quality) {
-            this.emit('change-levels', false, network);
+            this.emit('change-levels', network);
         }
 
         this.networks[network.address] = network;
     } else {
         this.networks[network.address] = network;
 
-        this.emit('appear', false, network);
+        this.emit('appear', network);
     }
 };
 
@@ -116,11 +111,9 @@ Wireless.prototype._seeNetwork = function(network) {
 Wireless.prototype.stop = function(callback) {
     this.killing = true;
     clearInterval(this.scanner);
-    this.emit('stop', false);
+    this.emit('stop');
 
-    if (callback) {
-        callback();
-    }
+    callback && callback();
 };
 
 // Returns a listing of networks from the last scan
@@ -133,12 +126,13 @@ Wireless.prototype.list = function() {
 Wireless.prototype.dhcp = function(network, callback) {
     var self = this;
 
-    this.emit('debug', false, this.commands.dhcp);
+    this.emit('debug', this.commands.dhcp);
 
     exec(this.commands.dhcp, function(err, stdout, stderr) {
         if (err) {
-            self.emit('fatal', false, "There was an unknown error enabling dhcp" + err);
-            throw err;
+            self.emit('error', "There was an unknown error enabling dhcp" + err);
+            callback && callback(err);
+            return;
         }
 
         // Command output is over stderr :'(
@@ -154,12 +148,13 @@ Wireless.prototype.dhcp = function(network, callback) {
         });
 
         if (ip_address) {
-            self.emit('dhcp-acquired-ip', false, ip_address);
+            self.emit('dhcp-acquired-ip', ip_address);
+            callback && callback(null, ip_address);
+            return;
         }
 
-        if (callback) {
-            callback(ip_address);
-        }
+        self.emit('error', "Couldn't get an IP Address from DHCP");
+        callback && callback(true);
     });
 };
 
@@ -167,17 +162,15 @@ Wireless.prototype.dhcp = function(network, callback) {
 Wireless.prototype.dhcpStop = function(callback) {
     var self = this;
 
-    this.emit('debug', false, this.commands.dhcp_disable);
+    this.emit('debug', this.commands.dhcp_disable);
 
     exec(this.commands.dhcp_disable, function(err, stdout, stderr) {
         if (err) {
-            self.emit('fatal', false, "There was an unknown error disabling dhcp" + err);
-            throw err;
+            self.emit('error', "There was an unknown error disabling dhcp" + err);
+            callback && callback(err);
         }
 
-        if (callback) {
-            callback();
-        }
+        callback && callback(null);
     });
 };
 
@@ -185,26 +178,28 @@ Wireless.prototype.dhcpStop = function(callback) {
 Wireless.prototype.enable = function(callback) {
     var self = this;
 
-    this.emit('debug', false, this.commands.enable);
+    this.emit('debug', this.commands.enable);
 
     exec(this.commands.enable, function(err, stdout, stderr) {
         if (err) {
             if (err.message.indexOf("No such device")) {
-                self.emit('fatal', false, "The interface " + self.iface + " does not exist.");
-                process.exit(1);
+                self.emit('error', "The interface " + self.iface + " does not exist.");
+                callback && callback(err);
+                return;
             }
 
-            self.emit('fatal', false, "There was an unknown error enabling the interface" + err);
-            throw err;
+            self.emit('error', "There was an unknown error enabling the interface" + err);
+            callback && callback(err);
+            return;
         }
 
         if (stdout || stderr) {
-            self.emit('error', false, "There was an error enabling the interface" + stdout + stderr);
+            self.emit('error', "There was an error enabling the interface" + stdout + stderr);
+            callback && callback(stdout || stderr);
+            return;
         }
 
-        if (callback) {
-            callback();
-        }
+        callback && callback(null);
     });
 };
 
@@ -212,32 +207,32 @@ Wireless.prototype.enable = function(callback) {
 Wireless.prototype.disable = function(callback) {
     var self = this;
 
-    this.emit('debug', false, this.commands.disable);
+    this.emit('debug', this.commands.disable);
 
     exec(this.commands.disable, function(err, stdout, stderr) {
         if (err) {
-            this.emit('fatal', false, "There was an unknown error disabling the interface" + err);
-            throw err;
+            this.emit('error', "There was an unknown error disabling the interface" + err);
+            callback && callback(err);
+            return;
         }
 
         if (stdout || stderr) {
-            this.emit('error', false, "There was an error disabling the interface" + stdout + stderr);
+            this.emit('error', "There was an error disabling the interface" + stdout + stderr);
+            callback && callback(stdout || stderr);
         }
 
-        if (callback) {
-            callback();
-        }
+        callback && callback(null);
     });
 };
 
 // Attempts to connect to the specified network
-Wireless.prototype.join = function(network, password, callback_success, callback_failure) {
+Wireless.prototype.join = function(network, password, callback) {
     if (network.encryption_wep) {
-        this._executeConnectWEP(network.ssid, password, callback_success, callback_failure);
+        this._executeConnectWEP(network.ssid, password, callback);
     } else if (network.encryption_wpa || network.encryption_wpa2) {
-        this._executeConnectWPA(network.ssid, password, callback_success, callback_failure);
+        this._executeConnectWPA(network.ssid, password, callback);
     } else {
-        this._executeConnectOPEN(network.ssid, callback_success, callback_failure);
+        this._executeConnectOPEN(network.ssid, callback);
     }
 };
 
@@ -245,15 +240,15 @@ Wireless.prototype.join = function(network, password, callback_success, callback
 Wireless.prototype.leave = function(callback) {
     var self = this;
 
-    this.emit('debug', false, this.commands.leave);
+    this.emit('debug', this.commands.leave);
     exec(this.commands.leave, function(err, stdout, stderr) {
         if (err) {
-            self.emit('fatal', false, "There was an error when we tried to disconnect from the network");
-            throw err;
+            self.emit('error', "There was an error when we tried to disconnect from the network");
+            callback && callback(err);
+            return;
         }
-        if (callback) {
-            callback();
-        }
+
+        callback && callback(null);
     });
 };
 
@@ -313,7 +308,7 @@ Wireless.prototype._parseScan = function(scanResults) {
     }
 
     if (networkCount === 0) {
-        this.emit('empty-scan', null);
+        this.emit('empty-scan');
     }
 
     return networks;
@@ -324,7 +319,7 @@ Wireless.prototype._executeScan = function() {
     var self = this;
 
     // Make this a non annonymous function, run immediately, then run interval which runs function
-    this.emit('debug', false, this.commands.scan);
+    this.emit('debug', this.commands.scan);
 
     exec(this.commands.scan, function(err, stdout, stderr) {
         if (err) {
@@ -333,19 +328,20 @@ Wireless.prototype._executeScan = function() {
                 return;
             }
 
-            self.emit('fatal', false, "Got some major errors from our scan command:" + err);
-            throw err;
+            self.emit('error', "Got some major errors from our scan command:" + err);
+            // TODO: Destroy
+            return;
         }
 
         if (stderr) {
             if (stderr.match(/Device or resource busy/)) {
-                self.emit('warning', false, "Scans are overlapping; slow down update frequency");
+                self.emit('error', "Scans are overlapping; slow down update frequency");
                 return;
             } else if (stderr.match(/Allocation failed/)) {
-                self.emit('warning', false, "Too many networks for iwlist to handle");
+                self.emit('error', "Too many networks for iwlist to handle");
                 return;
             } else {
-                self.emit('warning', false, "Got some errors from our scan command: ", stderr);
+                self.emit('error', "Got some errors from our scan command: ", stderr);
             }
         }
 
@@ -357,7 +353,7 @@ Wireless.prototype._executeScan = function() {
         var networks = self._parseScan(content);
 
         // emit the raw data
-        self.emit('batch-scan', null, networks);
+        self.emit('batch-scan', networks);
 
         _.each(networks, function(network) {
             self._seeNetwork(network);
@@ -371,12 +367,13 @@ Wireless.prototype._executeScan = function() {
 Wireless.prototype._executeTrackConnection = function() {
     var self = this;
 
-    this.emit('debug', false, this.commands.stat);
+    this.emit('debug', this.commands.stat);
 
     exec(this.commands.stat, function(err, stdout, stderr) {
         if (err) {
-            this.emit('fatal', false, "Error getting wireless devices information");
-            throw err;
+            this.emit('error', "Error getting wireless devices information");
+            // TODO: Destroy
+            return;
         }
 
         var content = stdout.toString();
@@ -403,83 +400,85 @@ Wireless.prototype._executeTrackConnection = function() {
         // guess we're not connected after all
         if (!foundOutWereConnected && self.connected) {
             self.connected = false;
-            self.emit('leave', false);
+            self.emit('leave');
         } else if (foundOutWereConnected && !self.connected) {
             self.connected = true;
-            self.emit('join', false, self.networks[networkAddress]);
+            self.emit('join', self.networks[networkAddress]);
         }
     });
 };
 
 // Connects to a WEP encrypted network
-Wireless.prototype._executeConnectWEP = function(essid, password, callback_success, callback_failure) {
+Wireless.prototype._executeConnectWEP = function(essid, password, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_wep, {'essid': essid, 'password': password});
-    this.emit('debug', false, command);
+    var command = this.translate(this.commands.connect_wep, {
+        essid: essid,
+        password: password
+    });
+
+    this.emit('debug', command);
 
     exec(command, function(err, stdout, stderr) {
         if (err || stderr) {
-            self.emit('error', false, "Shit is broken TODO");
+            self.emit('error', "Shit is broken TODO");
             console.log(err);
             console.log(stderr);
 
-            if (callback_failure) {
-                callback_failure();
-            }
-        } else {
-            if (callback_success) {
-                callback_success();
-            }
+            callback && callback(err || stderr);
+            return;
         }
+
+        callback && callback(null);
     });
 };
 
 // Connects to a WPA or WPA2 encrypted network
-Wireless.prototype._executeConnectWPA = function(essid, password, callback_success, callback_failure) {
+Wireless.prototype._executeConnectWPA = function(essid, password, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_wpa, {'essid': essid, 'password': password});
-    this.emit('debug', false, command);
+    var command = this.translate(this.commands.connect_wpa, {
+        essid: essid,
+        password: password
+    });
+
+    this.emit('debug', command);
 
     exec(command, function(err, stdout, stderr) {
          if (err || stderr) {
-            self.emit('error', false, "Shit is broken TODO");
+            self.emit('error', "Shit is broken TODO");
             console.log(err);
             console.log(stderr);
 
-            if (callback_failure) {
-                callback_failure();
-            }
-        } else {
-            if (callback_success) {
-                callback_success();
-            }
+            callback && callback(err || stderr);
+            return;
         }
+
+        callback && callback(null);
     });
 };
 
 // Connects to an unencrypted network
-Wireless.prototype._executeConnectOPEN = function(essid, callback_success, callback_failure) {
+Wireless.prototype._executeConnectOPEN = function(essid, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_open, {'essid': essid});
-    this.emit('debug', false, command);
+    var command = this.translate(this.commands.connect_open, {
+        essid: essid
+    });
+
+    this.emit('debug', command);
 
     exec(command, function(err, stdout, stderr) {
         if (err || stderr) {
-            self.emit('error', false, "There was an error joining an open network");
+            self.emit('error', "There was an error joining an open network");
             console.log(err);
             console.log(stderr);
 
-            if (callback_failure) {
-                callback_failure();
-            }
-        } else {
-            if (callback_success) {
-                callback_success();
-            }
+            callback && callback(err || stdout);
+            return;
         }
+
+        callback && callback(null);
     });
 };
 
@@ -495,10 +494,9 @@ Wireless.prototype._decay = function() {
         this_network.last_tick++;
 
         if (this_network.last_tick == this.vanishThreshold+1) {
-            this.emit('vanish', false, this_network);
+            this.emit('vanish', this_network);
         }
     }
 };
-
 
 module.exports = Wireless;
