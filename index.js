@@ -353,7 +353,7 @@ Wireless.prototype._executeScan = function() {
         var networks = self._parseScan(content);
 
         // emit the raw data
-        self.emit('batch-scan', networks);
+        self.emit('batch', networks);
 
         _.each(networks, function(network) {
             self._seeNetwork(network);

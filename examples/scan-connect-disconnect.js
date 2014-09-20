@@ -118,7 +118,7 @@ wireless.on('dhcp', function(ip_address) {
 });
 
 /*
-wireless.on('batch-scan', function(networks) {
+wireless.on('batch', function(networks) {
     console.log("[   BATCH] " + networks);
 });
 */
