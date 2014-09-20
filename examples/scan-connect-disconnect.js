@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var wireless = require('../index.js');
+var Wireless = require('../index.js');
 var fs = require('fs');
 
 var connectedToMyHome = false;
@@ -14,7 +14,7 @@ if (!iface) {
     process.exit();
 }
 
-wireless.configure({
+var wireless = new Wireless({
     iface: iface,
     updateFrequency: 12,
     vanishThreshold: 7,
