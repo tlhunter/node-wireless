@@ -109,7 +109,7 @@ wireless.on('leave', function() {
 });
 
 // Just for debugging purposes
-wireless.on('debug', function(command) {
+wireless.on('command', function(command) {
     console.log("[ COMMAND] " + command);
 });
 

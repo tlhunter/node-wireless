@@ -126,7 +126,7 @@ Wireless.prototype.list = function() {
 Wireless.prototype.dhcp = function(network, callback) {
     var self = this;
 
-    this.emit('debug', this.commands.dhcp);
+    this.emit('command', this.commands.dhcp);
 
     exec(this.commands.dhcp, function(err, stdout, stderr) {
         if (err) {
@@ -162,7 +162,7 @@ Wireless.prototype.dhcp = function(network, callback) {
 Wireless.prototype.dhcpStop = function(callback) {
     var self = this;
 
-    this.emit('debug', this.commands.dhcp_disable);
+    this.emit('command', this.commands.dhcp_disable);
 
     exec(this.commands.dhcp_disable, function(err, stdout, stderr) {
         if (err) {
@@ -178,7 +178,7 @@ Wireless.prototype.dhcpStop = function(callback) {
 Wireless.prototype.enable = function(callback) {
     var self = this;
 
-    this.emit('debug', this.commands.enable);
+    this.emit('command', this.commands.enable);
 
     exec(this.commands.enable, function(err, stdout, stderr) {
         if (err) {
@@ -207,7 +207,7 @@ Wireless.prototype.enable = function(callback) {
 Wireless.prototype.disable = function(callback) {
     var self = this;
 
-    this.emit('debug', this.commands.disable);
+    this.emit('command', this.commands.disable);
 
     exec(this.commands.disable, function(err, stdout, stderr) {
         if (err) {
@@ -240,7 +240,7 @@ Wireless.prototype.join = function(network, password, callback) {
 Wireless.prototype.leave = function(callback) {
     var self = this;
 
-    this.emit('debug', this.commands.leave);
+    this.emit('command', this.commands.leave);
     exec(this.commands.leave, function(err, stdout, stderr) {
         if (err) {
             self.emit('error', "There was an error when we tried to disconnect from the network");
@@ -319,7 +319,7 @@ Wireless.prototype._executeScan = function() {
     var self = this;
 
     // Make this a non annonymous function, run immediately, then run interval which runs function
-    this.emit('debug', this.commands.scan);
+    this.emit('command', this.commands.scan);
 
     exec(this.commands.scan, function(err, stdout, stderr) {
         if (err) {
@@ -367,7 +367,7 @@ Wireless.prototype._executeScan = function() {
 Wireless.prototype._executeTrackConnection = function() {
     var self = this;
 
-    this.emit('debug', this.commands.stat);
+    this.emit('command', this.commands.stat);
 
     exec(this.commands.stat, function(err, stdout, stderr) {
         if (err) {
@@ -424,7 +424,7 @@ Wireless.prototype._executeConnectWEP = function(essid, password, callback) {
         password: password
     });
 
-    this.emit('debug', command);
+    this.emit('command', command);
 
     exec(command, function(err, stdout, stderr) {
         if (err || stderr) {
@@ -449,7 +449,7 @@ Wireless.prototype._executeConnectWPA = function(essid, password, callback) {
         password: password
     });
 
-    this.emit('debug', command);
+    this.emit('command', command);
 
     exec(command, function(err, stdout, stderr) {
          if (err || stderr) {
@@ -473,7 +473,7 @@ Wireless.prototype._executeConnectOPEN = function(essid, callback) {
         essid: essid
     });
 
-    this.emit('debug', command);
+    this.emit('command', command);
 
     exec(command, function(err, stdout, stderr) {
         if (err || stderr) {
