@@ -113,7 +113,7 @@ wireless.on('command', function(command) {
     console.log("[ COMMAND] " + command);
 });
 
-wireless.on('dhcp-acquired-ip', function(ip_address) {
+wireless.on('dhcp', function(ip_address) {
     console.log("[    DHCP] Leased IP " + ip_address);
 });
 

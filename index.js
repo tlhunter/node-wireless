@@ -148,7 +148,7 @@ Wireless.prototype.dhcp = function(network, callback) {
         });
 
         if (ip_address) {
-            self.emit('dhcp-acquired-ip', ip_address);
+            self.emit('dhcp', ip_address);
             callback && callback(null, ip_address);
             return;
         }
