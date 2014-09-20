@@ -98,6 +98,11 @@ wireless.on('join', function(network) {
     console.log("[    JOIN] " + network.ssid + " [" + network.address + "] ");
 });
 
+// You were already connected, so it's not technically a join event...
+wireless.on('already-joined', function(address) {
+    console.log("[OLD JOIN] " + address);
+});
+
 // We've left a network
 wireless.on('leave', function() {
     console.log("[   LEAVE] Left the network");

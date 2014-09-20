@@ -403,7 +403,14 @@ Wireless.prototype._executeTrackConnection = function() {
             self.emit('leave');
         } else if (foundOutWereConnected && !self.connected) {
             self.connected = true;
-            self.emit('join', self.networks[networkAddress]);
+            var network = self.networks[networkAddress];
+
+            if (network) {
+                self.emit('join', network);
+                return;
+            }
+
+            self.emit('already-joined', networkAddress);
         }
     });
 };
