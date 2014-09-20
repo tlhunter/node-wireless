@@ -37,7 +37,7 @@ var Wireless = function(config) {
 
     // Translates each individual command
     for (var command in this.commands) {
-        this.commands[command] = this.translate(this.commands[command], {
+        this.commands[command] = this._translate(this.commands[command], {
             'interface': this.iface,
         });
     }
@@ -62,7 +62,7 @@ Wireless.prototype.COMMANDS = {
 };
 
 // Translates strings. Looks for :SOMETHING in string, and replaces is with data.something.
-Wireless.prototype.translate = function(string, data) {
+Wireless.prototype._translate = function(string, data) {
     for (var index in data) {
         if (!data.hasOwnProperty(index)) break;
         string = string.replace(':' + index.toUpperCase(), data[index]);
@@ -420,7 +420,7 @@ Wireless.prototype._executeTrackConnection = function() {
 Wireless.prototype._executeConnectWEP = function(essid, password, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_wep, {
+    var command = this._translate(this.commands.connect_wep, {
         essid: essid,
         password: password
     });
@@ -445,7 +445,7 @@ Wireless.prototype._executeConnectWEP = function(essid, password, callback) {
 Wireless.prototype._executeConnectWPA = function(essid, password, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_wpa, {
+    var command = this._translate(this.commands.connect_wpa, {
         essid: essid,
         password: password
     });
@@ -470,7 +470,7 @@ Wireless.prototype._executeConnectWPA = function(essid, password, callback) {
 Wireless.prototype._executeConnectOPEN = function(essid, callback) {
     var self = this;
 
-    var command = this.translate(this.commands.connect_open, {
+    var command = this._translate(this.commands.connect_open, {
         essid: essid
     });
 
