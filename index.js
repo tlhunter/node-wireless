@@ -10,10 +10,10 @@ var Wireless = function(config) {
     this.networks = {};
 
     // ID for scanner interval
-    this.scanner = null;
+    this.scanTimer = null;
 
     // ID for connection checking interval
-    this.connectionSpy = null;
+    this.connectTimer = null;
 
     // True if we're shutting down
     this.killing = false;
@@ -77,13 +77,13 @@ Wireless.prototype.start = function() {
 
     // Check for networks
     this._executeScan();
-    this.scanner = setInterval(function() {
+    this.scanTimer = setInterval(function() {
         self._executeScan();
     }, this.updateFrequency * 1000);
 
     // Are we connected?
     this._executeTrackConnection();
-    this.connectionSpy = setInterval(function() {
+    this.connectTimer = setInterval(function() {
         self._executeTrackConnection();
     }, this.connectionSpyFrequency * 1000);
 };
@@ -110,7 +110,9 @@ Wireless.prototype._seeNetwork = function(network) {
 // Stop listening
 Wireless.prototype.stop = function(callback) {
     this.killing = true;
-    clearInterval(this.scanner);
+    clearInterval(this.scanTimer);
+    clearInterval(this.connectTimer);
+
     this.emit('stop');
 
     callback && callback();

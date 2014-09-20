@@ -146,12 +146,8 @@ process.on('SIGINT', function() {
     console.log("[PROGRESS] Disabling Adapter...");
 
     wireless.disable(function() {
-        console.log("[PROGRESS] Stopping Wireless App...");
+        console.log("[PROGRESS] Stopping and Exiting...");
 
-        wireless.stop(function() {
-            console.log("[PROGRESS] Exiting...");
-
-            process.exit();
-        });
+        wireless.stop();
     });
 });
