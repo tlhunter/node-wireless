@@ -30,6 +30,36 @@ npm install wireless
 ```
 
 
+## Usage
+
+```javascript
+var wireless = new Wireless({
+    iface: 'wlan0'
+});
+
+wireless.enable(function(err) {
+	wireless.start();
+});
+```
+
+
+## Events
+
+* **appear**: A never-before seen network has appeared
+* **change**: A seen wireless network has changed properties (e.g. SSID or encryption)
+* **signal**: A seen wireless network has it's signal change (e.g. strength or quality)
+* **vanish**: A seen network has been determined to no longer be accessible
+* **empty**: A network scan was executed but nothing was discovered
+* **error**: Something bad has happened
+* **command**: Debugging: Emits the shell command about to be executed
+* **batch**: Debugging: Raw information about all networks from the last batch scan
+* **join**: The interface has connected to a new network
+* **former**: The interface had been connected to a network before Wireless ran
+* **dhcp**: An IP address has been assigned via DHCP
+* **leave**: The interface has left the network it was connected to
+* **stop**: The interface is no longer looking for networks
+
+
 ## Current Status
 
 Currently, enabling/disabling adapter works, finding new networks will trigger events,
