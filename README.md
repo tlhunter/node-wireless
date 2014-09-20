@@ -60,6 +60,19 @@ wireless.enable(function(err) {
 * **stop**: The interface is no longer looking for networks
 
 
+## Methods
+
+* **enable**: Enables the wireless interface
+* **start**: Begins the scanning
+* **join**: Attempts to join the specified network
+* **leave**: Attempts to leave the specified network
+* **stop**: Stops the scanning process
+* **disable**: Disables the wireless interface
+* **list**: Gets a list of all the currently visible networks
+* **dhcp**: Attempts to enable DHCP for the interface and get an IP Address
+* **dhcpStop**: Attempts to stop the DHCP process
+
+
 ## Current Status
 
 Currently, enabling/disabling adapter works, finding new networks will trigger events,
