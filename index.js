@@ -125,7 +125,7 @@ Wireless.prototype.list = function() {
 };
 
 // Attempts to run dhcpcd on the interface to get us an IP address
-Wireless.prototype.dhcp = function(network, callback) {
+Wireless.prototype.dhcp = function(callback) {
     var self = this;
 
     this.emit('command', this.commands.dhcp);

@@ -62,7 +62,7 @@ wireless.on('appear', function(network) {
             }
 
             console.log("Yay, we connected! I will try to get an IP.");
-            wireless.dhcp(network, function(ip_address) {
+            wireless.dhcp(function(ip_address) {
                 console.log("Yay, I got an IP address (" + ip_address + ")! I'm going to disconnect in 20 seconds.");
 
                 setTimeout(function() {
