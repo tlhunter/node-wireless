@@ -2,7 +2,7 @@
   "author": "Thomas Hunter <tlhunter@gmail.com>",
   "name": "wireless",
   "description": "Tool for handling all aspects of wifi wireless networks",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/tlhunter/node-wireless",
   "repository": {
     "type": "git",
