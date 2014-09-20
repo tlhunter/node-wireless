@@ -372,7 +372,7 @@ Wireless.prototype._executeTrackConnection = function() {
 
     exec(this.commands.stat, function(err, stdout, stderr) {
         if (err) {
-            this.emit('error', "Error getting wireless devices information");
+            self.emit('error', "Error getting wireless devices information");
             // TODO: Destroy
             return;
         }
