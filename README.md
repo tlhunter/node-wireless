@@ -69,12 +69,12 @@ wireless.enable(function(err) {
 * **enable(cb)**: Enables the wireless interface
 * **start()**: Begins the scanning
 * **join(network, pwd, cb)**: Attempts to join the specified network
+* **dhcp(cb)**: Attempts to enable DHCP for the interface and get an IP Address
+* **dhcpStop(cb)**: Attempts to stop the DHCP process
 * **leave(cb)**: Attempts to leave the specified network
 * **stop(cb)**: Stops the scanning process
 * **disable(cb)**: Disables the wireless interface
 * **list()**: Gets a list of all the currently visible networks
-* **dhcp(cb)**: Attempts to enable DHCP for the interface and get an IP Address
-* **dhcpStop(cb)**: Attempts to stop the DHCP process
 
 
 ## Current Status
