@@ -284,8 +284,17 @@ Wireless.prototype._parseScan = function(scanResults) {
         } else if (line.indexOf('Channel') === 0) {
             network.channel = line.match(/Channel:([0-9]{1,2})/)[1];
         } else if (line.indexOf('Quality') === 0) {
-            network.quality = line.match(/Quality=([0-9]{1,2})\/70/)[1];
-            network.strength = line.match(/Signal level=(-?[0-9]{1,3}) dBm/)[1];
+            // observed versions of this line:
+            //   Quality=100/100  Signal level=47/100
+            //   Quality:23  Signal level:0  Noise level:0
+            var qMatch = line.match(/Quality(:|=)(\d+)[^\d]/),
+                sMatch = line.match(/Signal level(:|=)(-?\d+)[^\d]/);
+            if (qMatch && qMatch.length >= 3) {
+                network.quality = parseInt(qMatch[2]);
+            }
+            if (sMatch && sMatch.length >= 3) {
+                network.strength = parseInt(sMatch[2]);
+            }
         } else if (line.indexOf('Encryption key') === 0) {
             var enc = line.match(/Encryption key:(on|off)/)[1];
             if (enc === 'on') {
