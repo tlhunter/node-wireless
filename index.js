@@ -290,10 +290,10 @@ Wireless.prototype._parseScan = function(scanResults) {
             var qMatch = line.match(/Quality(:|=)(\d+)[^\d]/),
                 sMatch = line.match(/Signal level(:|=)(-?\d+)[^\d]/);
             if (qMatch && qMatch.length >= 3) {
-                network.quality = parseInt(qMatch[2]);
+                network.quality = parseInt(qMatch[2], 10);
             }
             if (sMatch && sMatch.length >= 3) {
-                network.strength = parseInt(sMatch[2]);
+                network.strength = parseInt(sMatch[2], 10);
             }
         } else if (line.indexOf('Encryption key') === 0) {
             var enc = line.match(/Encryption key:(on|off)/)[1];
