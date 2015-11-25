@@ -57,7 +57,7 @@ Wireless.prototype.COMMANDS = {
 
     metric: 'sudo ifconfig :INTERFACE metric :METRIC',
     connect_wep: 'sudo iwconfig :INTERFACE essid ":ESSID" key :PASSWORD',
-    connect_wpa: 'sudo wpa_passphrase ":ESSID" :PASSWORD > wpa-temp.conf && sudo wpa_supplicant -D wext -i :INTERFACE -c wpa-temp.conf && rm wpa-temp.conf',
+    connect_wpa: "sudo wpa_passphrase ':ESSID' ':PASSWORD' > wpa-temp.conf && sudo wpa_supplicant -D wext -i :INTERFACE -c wpa-temp.conf && rm wpa-temp.conf",
     connect_open: 'sudo iwconfig :INTERFACE essid ":ESSID"',
 };
 
