@@ -78,7 +78,9 @@ Wireless.prototype.start = function() {
     // Check for networks
     this._executeScan();
     this.scanTimer = setInterval(function() {
-        self._executeScan();
+        if(!self.connected) {
+            self._executeScan();
+        }
     }, this.updateFrequency * 1000);
 
     // Are we connected?
