@@ -373,6 +373,16 @@ Wireless.prototype._executeScan = function() {
             self._seeNetwork(network);
         });
 
+        //Remove disappeared wifi from the networks list
+        for (let macAddr in self.networks) {
+            let disappeared = !networks.find(function(network) {
+                return macAddr == network.address;
+            });
+            if (disappeared) {
+                delete self.networks[macAddr];
+            }
+        }
+
         self._decay();
     });
 };
